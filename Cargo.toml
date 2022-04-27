@@ -1,0 +1,18 @@
+[package]
+name = "bytesize-serde"
+description = "Alternative serde implementation for bytesize crate based on its FromStr"
+license-file = "LICENSE"
+version = "0.1.0"
+repository = "https://github.com/l4l/bytesize-serde"
+homepage = "https://github.com/l4l/bytesize-serde"
+edition = "2021"
+
+[dependencies]
+bytesize = "1.1.0"
+serde = "1"
+
+[dev-dependencies]
+serde = { version = "1.0.136", features = ["derive"] }
+quickcheck = "1.0.3"
+quickcheck_macros = "1.0.0"
+serde_json = "1.0.79"
