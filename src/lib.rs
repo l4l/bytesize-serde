@@ -44,7 +44,11 @@ where
         }
     }
 
-    deserializer.deserialize_any(Helper)
+    if deserializer.is_human_readable() {
+        deserializer.deserialize_any(Helper)
+    } else {
+        deserializer.deserialize_u64(Helper)
+    }
 }
 
 #[cfg(test)]
@@ -61,6 +65,16 @@ mod tests {
     #[quickcheck]
     fn deserializes_any(x: u64) {
         let _: W = serde_json::from_str(&x.to_string()).unwrap();
+    }
+
+    #[quickcheck]
+    fn serde_with_bincode(x: u64) {
+        let w = W(ByteSize::b(x));
+
+        let ser = bincode::serialize(&w).unwrap();
+        let de: W = bincode::deserialize(&ser).unwrap();
+
+        assert_eq!(w.0, de.0);
     }
 
     #[quickcheck]
