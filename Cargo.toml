@@ -2,7 +2,7 @@
 name = "bytesize-serde"
 description = "Alternative serde implementation for bytesize crate based on its FromStr"
 license-file = "LICENSE"
-version = "0.2.0"
+version = "0.2.1"
 repository = "https://github.com/l4l/bytesize-serde"
 homepage = "https://github.com/l4l/bytesize-serde"
 edition = "2021"
