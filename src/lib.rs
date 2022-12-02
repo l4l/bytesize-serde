@@ -28,6 +28,19 @@ where
             formatter.write_str("an integer or string")
         }
 
+        // TOML Integer(i64)
+        fn visit_i64<E: de::Error>(self, value: i64) -> Result<Self::Value, E> {
+            if let Ok(val) = u64::try_from(value) {
+                Ok(ByteSize(val))
+            } else {
+                Err(E::invalid_value(
+                    de::Unexpected::Signed(value),
+                    &"integer overflow",
+                ))
+            }
+        }
+
+        // JSON Integer(u64)
         fn visit_u64<E: de::Error>(self, value: u64) -> Result<Self::Value, E> {
             Ok(ByteSize(value))
         }
